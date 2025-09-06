@@ -1,94 +1,106 @@
-<h2>SOLID Principle</h2>
-1. <b>Single Responsibility :-</b> Class / Function must have only one objective. <br>
-2. <b>Open & Close Principle :-</b> Object must be open for enhancement, close for modification. <br>
-3. <b>Liskov Substitution :-</b> Class must be override by it subtype without changing its behaviour. <br>
-4. <b>Interface Generation :-</b> Class should not depend on interface method which they dont use. (Interface pollution).
-5. <b>Dependency Inversion :-</b> High level module should not depend on low level module, both should depend on abstraction. / Abstraction should depend on depend on details, rather details should depend on abstraction (interface)
+# 📘 SOLID Principles
 
-<br><br>
-<b>High level module :</b> any business logic<br>
-<b>Low level module :</b> convertion from Java to Json or writing to disk.<br>
+The **SOLID principles** are a set of guidelines for writing clean, maintainable, and scalable code.  
 
+1. **Single Responsibility Principle (SRP)**  
+   A class/function should have **only one reason to change** — it must serve a single objective.
 
-<hr></hr>
+2. **Open/Closed Principle (OCP)**  
+   Software entities should be **open for extension but closed for modification**.
 
+3. **Liskov Substitution Principle (LSP)**  
+   Subtypes must be substitutable for their base types **without altering the correctness** of the program.
 
-<h2> Design Pattern </h2>
+4. **Interface Segregation Principle (ISP)**  
+   Clients should not be forced to depend on methods they **do not use**. (Avoid interface pollution.)
 
-<ol>
-    <li><b> Creational Design Pattern :</b> It deal with the process of creating of object of class. </li>
-    <ol>
-        <li>Builder</li>
-        <li>Simple Factory</li>
-        <li>Factory Method</li>
-        <li>Proto Method</li>
-        <li>Singleton</li>
-        <li>Abstract Factory</li>
-        <li>Object pool</li>
-    </ol>
-    <li><b> Structural Design Pattern :</b> It deal with how the classes and object are arranged or composed</li>
-    <a name="behavioural"></a>
-<li><b> Behavioural Design Pattern :</b> It deal with how the classes and object interact and communicate with each other.</li>
-</ol>
+5. **Dependency Inversion Principle (DIP)**  
+   - High-level modules should not depend on low-level modules.  
+   - Both should depend on **abstractions**.  
+   - Abstractions should not depend on details; **details should depend on abstractions**.
 
-<br>
+👉 **High-level modules** = Business logic  
+👉 **Low-level modules** = Conversions (e.g., Java ↔ JSON), writing to disk  
 
-<h3>1. Creational</h3>
-<h4>1. Builder:</h4>
-Suppose we need a immutable class with lots of arguments.<br>
+---
 
-<pre><code>class product {
-    String a;
-    String b;
-    String c;
-    ..
+# 🎨 Design Patterns
 
-    Product(String a, String b, String c ..){}
+Design patterns provide **proven solutions** to common software design problems.  
+
+## 1. Creational Patterns  
+Deal with object creation mechanisms.  
+
+- Builder  
+- Simple Factory  
+- Factory Method  
+- Prototype  
+- Singleton  
+- Abstract Factory  
+- Object Pool  
+
+## 2. Structural Patterns  
+Deal with **class and object composition**.  
+
+## 3. Behavioral Patterns  
+Deal with **object interaction and communication**.  
+
+---
+
+## 🔨 Creational Patterns in Detail
+
+### 1. Builder Pattern  
+Used when we need an **immutable class with many parameters**.
+
+```java
+class Product {
+    private String a;
+    private String b;
+    private String c;
+
+    Product(String a, String b, String c) {
+        this.a = a;
+        this.b = b;
+        this.c = c;
+    }
 }
-</code></pre>
+```
 
-as the number of arguments increase, it will became difficult for other developer to use. Builder design pattern can help us in this.
+As parameters grow, constructors become **hard to use**. The Builder pattern solves this by moving construction logic to a **separate builder class**.
 
-* In Builder , we remove the logic related object construction from code & abstract it in seperate class.
+**Design considerations**:  
+- A separate *Director* class is rarely needed — usually the client plays this role.  
+- An abstract builder is not required unless the `Product` is part of an inheritance hierarchy.  
 
-<h5>Design Consideration:</h5>
-<ol>
-<li> Director roles is rarely implemented as seperate class, typically the comsumer of the object instance or the client handle this role.</li>
-<li> Abstract builder is also not required if "product" itself is not part of any inheritance.</li>
-<li> The director role is rarely implemented as a seperate class, typically the consumer of the object instance or the client handle the role.</li>
-<li> Abstract builder is also not required if "product" itself is not part of any instance hierarchy.</li>
-</ol>
+---
 
+### 2. Simple Factory  
+Moves instantiation logic to a **static method** in a separate class.  
 
-<br>
+**Implementation notes**:  
+- Can be a static method in an existing class.  
+- Should not maintain state (keep it stateless).  
+- Example: `NumberFormat.getInstance()` in Java.  
 
+---
 
-<h4>2. Simple Factory:</h4>
-<ol>
-    <li>Move the instantation logic to a seperate class : to a static methord</li>
-    <li>Implementation</li>
-    <ol>
-        <li>It can be just a methord is existing class, adding in a seperate class allow clode to be in simple factory more easily use/assessible</li>
-        <li>Simple factor itself doesnt need any state tracting. So its best to have / keep this as a static methord.</li>
-        <li>JAVA.textNumberFactory has getFactory()</li>
-    </ol>
-</ol>
+### 3. Factory Method  
+Provides an interface for creating objects but lets subclasses decide which class to instantiate.  
 
+**When to use**:  
+- When you don’t know the exact type of objects beforehand.  
+- When you want to allow new classes to be added without modifying client code.  
 
-<br>
+**Implementation**:  
+- Create an abstract `Creator` with a factory method returning a product.  
+- Subclasses override the factory method to return the correct type.  
 
-<h4>3. Factory Methord:</h4>
-<ol>
-    <li>Move the object creational logic to other class similar to simple factory.</li>
-    <li>We use this when we dont know the typoe of the class in advance which we may need to instantiate before hand ans also to allow new claases to have added to system and handle their creational wuth effecting client code.</li>
-    <li>Implementation:</li>
-    <ol>
-        <li>We can start by creating a class for a constructor</li>
-        <li>Creator itself can be concreate if it can provide default object or it can be abstract.</li>
-        <li>Implementation will override the methord ans return the object</li>
-    </ol>
-</ol>
+**Example**:  
 
-<br>
-* Message (ha one abstract methord) -> (json extend message, String extend message)<br>
-* MessageCreator (has an abstract methord returning message -> (JSONMessageCreator extend MessageCreator, StringMessageCreator extend MessageCreator)<br>
+- `Message` (abstract class/interface)  
+  - `JsonMessage`  
+  - `TextMessage`  
+
+- `MessageCreator` (abstract creator)  
+  - `JsonMessageCreator`  
+  - `TextMessageCreator`  
