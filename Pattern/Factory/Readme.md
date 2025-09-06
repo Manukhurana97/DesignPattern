@@ -1,4 +1,4 @@
-The <b>Factory Design pattern</b> is an <a href="">creational design pattern</a> that provide an interface for creating objects but let the subclass or a factory class decide which class to instantiate.
+The <b>Factory Design pattern</b> is an <a href="../../Readme#creational">creational design pattern</a> that provide an interface for creating objects but let the subclass or a factory class decide which class to instantiate.
 
 
 <p> ⚡ In short: The Factory pattern let you create objects (Circle/Rectangle) without exposing the instanciation logic to the client. The cliebnt only interact with the <code>Shape</code> interface. </p>

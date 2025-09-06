@@ -28,22 +28,25 @@ The **SOLID principles** are a set of guidelines for writing clean, maintainable
 
 Design patterns provide **proven solutions** to common software design problems.  
 
+<a name="creational"></a> 
 ## 1. Creational Patterns  
 Deal with object creation mechanisms.  
 
 - Builder  
 - Simple Factory  
-- *[Factory Method](./Pattern/Factory/Readme.md)  
+- *[Factory Method](./Pattern/Factory)  
 - Prototype  
 - Singleton  
 - Abstract Factory  
 - Object Pool  
 
+<a name="behavioural"></a> 
 ## 2. Structural Patterns  
 Deal with **class and object composition**.  
 
+<a name="behavioural"></a> 
 ## 3. Behavioral Patterns  
 Deal with **object interaction and communication**.  
-- *[Observer](./Pattern/Observer/Readme.md)
-- *[State](./Pattern/State/Readme.md)
-- *[Strategy](./Pattern/Strategy/Readme.md)
+- *[Observer](./Pattern/Observer)
+- *[State](./Pattern/State)
+- *[Strategy](./Pattern/Strategy)
