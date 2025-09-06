@@ -2,7 +2,7 @@
 1. <b>Single Responsibility :-</b> Class / Function must have only one objective. <br>
 2. <b>Open & Close Principle :-</b> Object must be open for enhancement, close for modification. <br>
 3. <b>Liskov Substitution :-</b> Class must be override by it subtype without changing its behaviour. <br>
-4. <b>Interface Segeration :-</b> Class should not depend on interface methord which they dont use. (Interface pollution).
+4. <b>Interface Generation :-</b> Class should not depend on interface method which they dont use. (Interface pollution).
 5. <b>Dependency Inversion :-</b> High level module should not depend on low level module, both should depend on abstraction. / Abstraction should depend on depend on details, rather details should depend on abstraction (interface)
 
 <br><br>
@@ -20,14 +20,15 @@
     <ol>
         <li>Builder</li>
         <li>Simple Factory</li>
-        <li>Factory Methord</li>
-        <li>Proto Methord</li>
+        <li>Factory Method</li>
+        <li>Proto Method</li>
         <li>Singleton</li>
         <li>Abstract Factory</li>
         <li>Object pool</li>
     </ol>
     <li><b> Structural Design Pattern :</b> It deal with how the classes and object are arranged or composed</li>
-    <li><b> Behavioural Design Pattern :</b> It deal with how the classes and object interact and communicate with each other.</li>
+    <a name="behavioural"></a>
+<li><b> Behavioural Design Pattern :</b> It deal with how the classes and object interact and communicate with each other.</li>
 </ol>
 
 <br>
