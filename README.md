@@ -40,7 +40,7 @@ Deal with object creation mechanisms.
 - Abstract Factory  
 - Object Pool  
 
-<a name="behavioural"></a> 
+<a name="structural"></a> 
 ## 2. Structural Patterns  
 Deal with **class and object composition**.  
 
