@@ -33,7 +33,7 @@ Deal with object creation mechanisms.
 
 - Builder  
 - Simple Factory  
-- Factory Method  
+- *[Factory Method](./Pattern/Factory/Readme.md)  
 - Prototype  
 - Singleton  
 - Abstract Factory  
@@ -44,63 +44,6 @@ Deal with **class and object composition**.
 
 ## 3. Behavioral Patterns  
 Deal with **object interaction and communication**.  
-
----
-
-## 🔨 Creational Patterns in Detail
-
-### 1. Builder Pattern  
-Used when we need an **immutable class with many parameters**.
-
-```java
-class Product {
-    private String a;
-    private String b;
-    private String c;
-
-    Product(String a, String b, String c) {
-        this.a = a;
-        this.b = b;
-        this.c = c;
-    }
-}
-```
-
-As parameters grow, constructors become **hard to use**. The Builder pattern solves this by moving construction logic to a **separate builder class**.
-
-**Design considerations**:  
-- A separate *Director* class is rarely needed — usually the client plays this role.  
-- An abstract builder is not required unless the `Product` is part of an inheritance hierarchy.  
-
----
-
-### 2. Simple Factory  
-Moves instantiation logic to a **static method** in a separate class.  
-
-**Implementation notes**:  
-- Can be a static method in an existing class.  
-- Should not maintain state (keep it stateless).  
-- Example: `NumberFormat.getInstance()` in Java.  
-
----
-
-### 3. Factory Method  
-Provides an interface for creating objects but lets subclasses decide which class to instantiate.  
-
-**When to use**:  
-- When you don’t know the exact type of objects beforehand.  
-- When you want to allow new classes to be added without modifying client code.  
-
-**Implementation**:  
-- Create an abstract `Creator` with a factory method returning a product.  
-- Subclasses override the factory method to return the correct type.  
-
-**Example**:  
-
-- `Message` (abstract class/interface)  
-  - `JsonMessage`  
-  - `TextMessage`  
-
-- `MessageCreator` (abstract creator)  
-  - `JsonMessageCreator`  
-  - `TextMessageCreator`  
+- *[Observer](./Pattern/Observer/Readme.md)
+- *[State](./Pattern/State/Readme.md)
+- *[Strategy](./Pattern/Strategy/Readme.md)
