@@ -23,19 +23,19 @@ public class Main {
 		System.out.println("\nB and C post answer");
 		Answer bAnswer = service.postAnswer(b.getId(), question.getId(), "public class main { public static void main(String[] args){ Systsem.out.println(hello World); } }");
 		Answer cAnswer = service.postAnswer(c.getId(), question.getId(), "public class test{ public static void main(String[] args){ Systsem.out.println(hello World); // hello world need to be in double quotes} }");
-		// service.printReputations(a,b,c);
+		service.printReputations(a,b,c);
 	
 
 		System.out.println("\n-- voting --");
 		service.voteToPost(a.getId(), question.getId(), VoteType.UPVOTE);
 		service.voteToPost(b.getId(), cAnswer.getId(), VoteType.UPVOTE);
 		service.voteToPost(a.getId(), bAnswer.getId(), VoteType.DOWNVOTE);
-		// service.printReputations(a,b,c);
+		service.printReputations(a,b,c);
 
 
 		System.out.println("\nA Accepted answer");
 		service.acceptAnswer(question.getId(), bAnswer.getId());
-		// service.printReputations(a,b,c);
+		service.printReputations(a,b,c);
 
 		System.out.println("\nSearch Question");
 		List<SearchStrategy> filter = List.of(

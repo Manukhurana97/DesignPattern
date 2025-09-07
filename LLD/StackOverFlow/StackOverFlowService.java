@@ -1,9 +1,11 @@
-import java.util.*;
+
 import entity.*;
 import enums.VoteType;
 import strategy.*;
+import observer.*;
 
-import java.util.Map;
+
+import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
 
 
@@ -12,6 +14,7 @@ public class StackOverFlowService {
 	private final Map<String, User> users = new ConcurrentHashMap<>();
 	private final Map<String, Question> questions = new ConcurrentHashMap<>();
 	private final Map<String, Answer> answers = new ConcurrentHashMap<>();
+	private final PostObserver reputationManager = new ReputationManager();
 
 	public User createUser(String userName) {
 		User user = new User(userName);
@@ -25,6 +28,7 @@ public class StackOverFlowService {
 		User author = users.get(userId);
 		Question question = new Question(author, title, body, tags);
 		questions.put(question.getId(), question);
+		question.addObserver(reputationManager);
 
 		System.out.println("question with title {"+ title+"} posted by "+userId);
 		return question;
@@ -37,6 +41,7 @@ public class StackOverFlowService {
 		
 		Answer answer = new Answer(user, body);
 		
+		answer.addObserver(reputationManager);
 		question.addAnswer(answer);
 		answers.put(answer.getId(), answer);
 
@@ -82,5 +87,10 @@ public class StackOverFlowService {
 		return result;
 	}
 
-
+	public void printReputations(User... users) {
+        System.out.println("--- Current Reputations ---");
+        for(User user : users) {
+            System.out.printf("%s: %d\n", user.getUserName(), user.getReputation());
+        }
+    }
 }
