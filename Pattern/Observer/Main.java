@@ -46,7 +46,7 @@ class Subscriber implements Observer{
 
 	@Override
 	public void update(String message) {
-		System.out.println("messaages send to "+name);
+		System.out.println(message+" : notifying user  " +name);
 	}
 }
 
