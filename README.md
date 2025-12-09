@@ -50,3 +50,13 @@ Deal with **object interaction and communication**.
 - *[Observer](./Pattern/Observer)
 - *[State](./Pattern/State)
 - *[Strategy](./Pattern/Strategy)
+
+
+
+
+# refer: 
+<ol> 
+<li>https://github.com/ashishps1/awesome-low-level-design</li>
+<li>https://github.com/donnemartin/system-design-primer</li> 
+<li>https://newsletter.systemdesign.one/?r=a1ck9</li>
+</ol>
