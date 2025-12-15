@@ -19,6 +19,9 @@ The **SOLID principles** are a set of guidelines for writing clean, maintainable
    - Both should depend on **abstractions**.  
    - Abstractions should not depend on details; **details should depend on abstractions**.
 
+
+*Reference: https://medium.com/backticks-tildes/the-s-o-l-i-d-principles-in-pictures-b34ce2f1e898
+
 👉 **High-level modules** = Business logic  
 👉 **Low-level modules** = Conversions (e.g., Java ↔ JSON), writing to disk  
 
