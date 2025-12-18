@@ -32,27 +32,34 @@ The **SOLID principles** are a set of guidelines for writing clean, maintainable
 Design patterns provide **proven solutions** to common software design problems.  
 
 <a name="creational"></a> 
-## 1. Creational Patterns  
+## *[1. Creational Patterns](./Pattern/Creational)  
 Deal with object creation mechanisms.  
 
-- Builder  
-- Simple Factory  
-- *[Factory Method](./Pattern/Factory)  
-- Prototype  
-- Singleton  
-- Abstract Factory  
-- Object Pool  
+- *[Builder](./Pattern/Creational/Builder)  
+- *[Factory Method](./Pattern/Creational/FactoryMethord)  
+- *[Abstract Factory](./Pattern/Creational/AbstractFactory)  
+- *[Singleton](./Pattern/Creational/Singleton)  
 
 <a name="structural"></a> 
-## 2. Structural Patterns  
+## *[2. Structural Patterns](./Pattern/Structural) 
 Deal with **class and object composition**.  
 
+- [Adaptor](./Pattern/Structural/Adaptor)
+- [Facade](./Pattern/Structural/Facade)
+- [Proxy](./Pattern/Structural/Proxy)
+- [Decorator](./Pattern/Structural/Decorator)
+- [Composite](./Pattern/Structural/Composite) 
+
 <a name="behavioural"></a> 
-## 3. Behavioral Patterns  
+## *[3. Behavioral Patterns](./Pattern/Behavioral) 
 Deal with **object interaction and communication**.  
-- *[Observer](./Pattern/Observer)
-- *[State](./Pattern/State)
-- *[Strategy](./Pattern/Strategy)
+
+
+- *[Iterator](./Pattern/Behavioral/Iterator)
+- *[Observer](./Pattern/Behavioral/Observer)
+- *[Strategy](./Pattern/Behavioral/Strategy)
+- *[Command](./Pattern/Behavioral/Command)
+- *[State](./Pattern/Behavioral/State)
 
 
 
