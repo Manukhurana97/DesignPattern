@@ -1,116 +1,101 @@
-<h1>Parking Lot</h1>
-<hr/>
+# 🚗 Parking Lot – Low Level Design (LLD Practice)
 
-<h2>ProblemStatement</h2>
-<p>
-	Design and implement a parking lot system where uses come and park, unpark his vehicle. During entry, we'll generate a ticket (hardcopy/virtual) and at the time of exit based on the hours and vehicle type we will calculate the total undue amount. Our prking lot has multiple floors and multiple spots of different types and user can add the floor and spot in future.
-</p>
-<hr/>
+## 📌 Problem Statement (In Short)
 
-<h2>Requirements</h2>
-<p>
-	<ul>
-		<li>Multiple floors</li>
-		<li>Parking spot</li>
-		<li>Vehicle type</li>
-		<li>Ticking system</li>
-		<li>Fee calculator</li>
-		<li>Spot Allocation</li>
-		<li>Extendability</li>
-	</ul>
-</p>
-<hr/>
+Design a **Parking Lot system** that supports:
 
-<h2>Core Entity</h2>
-<p>
-	<ul>
-		<li><b>ParkingLot</b>: Main class managing everything(floor, spot, entry, exit).</li>
-		<li><b>ParkingFloor</b>: Represent a single floor in parking lot and manager all the spots</li>
-		<li><b>ParkingSpot</b>: Represent the parling spot, vehicleType, park and unpark.</li>
-		<li><b>Ticket</b></li>: Represent a parking ticket issued to user.
-		<li><b>VehileType</b></li>: small, medium, large
-		<li><b>Fee calculator</b>: classes for calculating the amount based on hours and type.</li>
-	</ul>
-</p>
-<hr/>
+- Multiple parking floors
+- Different types of vehicles
+- Parking and un-parking vehicles
+- Parking ticket generation
+- Parking fee calculation
 
+> ⚠️ This is **LLD practice code**.  
+> Databases, REST APIs, and scalability concerns are intentionally skipped to focus on **object modeling and design clarity**.
 
+---
 
-```
+## 🧠 One-Glance Feature Summary
 
-                          +----------------------+
-                          |   ParkingLotService  |
-                          |----------------------|
-                          | - instance           |
-                          | - parkingStrategy    |
-                          | - feeStrategy        |
-                          | - floors             |
-                          | - tickets            |
-                          |----------------------|
-                          | + getInstance()      |
-                          | + entry(vehicle)     |
-                          | + exit(vehicle)      |
-                          | + showAvailability() |
-                          +----------+-----------+
-                                     |
-          uses (Strategy Pattern)     |
-        +----------------------------+-----------------------------+
-        |                                                            |
-+---------------------+                               +---------------------+
-|   ParkingStrategy   |                               |    FeeStrategy      |
-| (interface)         |                               |  (interface)        |
-|---------------------|                               |---------------------|
-| + findParkingSpot() |                               | + calculateFee()    |
-+----------+----------+                               +----------+----------+
-           |                                                             |
-+---------------------+                               +---------------------+
-|  NearestParking     |                               |    FlatRate         |
-|---------------------|                               |---------------------|
-| + findParkingSpot() |                               | + calculateFee()    |
-+---------------------+                               +---------------------+
+| Feature | Status |
+|------|------|
+| Multiple Parking Floors | ✅ |
+| Multiple Vehicle Types | ✅ |
+| Parking Spot Allocation | ✅ |
+| Entry & Exit Flow | ✅ |
+| Ticket Generation | ✅ |
+| Fee Calculation | ✅ |
+| Pluggable Parking Strategy | ✅ |
+| In-Memory Storage | ✅ |
+| Database / Persistence | ❌ (Out of scope) |
+| Concurrency Handling | ❌ (Not required for LLD) |
 
-       has-a (composition)
-+---------------------+
-|    ParkingFloor     |
-|---------------------|
-| - floorNumber       |
-| - parkingSpots      |
-|---------------------|
-| + addSpot()         |
-| + getAvailableSpot()|
-+----------+----------+
-           |
-           | contains
-+---------------------+
-|    ParkingSpot      |
-|---------------------|
-| - spotId            |
-| - vehicleType       |
-| - isOccupied        |
-|---------------------|
-| + parkVehicle()     |
-| + unparkVehicle()   |
-+----------+----------+
-           |
-           | creates
-+---------------------+
-|   ParkingTicket     |
-|---------------------|
-| - vehicle           |
-| - spot              |
-| - entryTime         |
-|---------------------+
-           ^
-           |
-+---------------------+
-|      Vehicle        |
-|---------------------|
-| - vehicleNumber     |
-| - vehicleType       |
-+---------------------+
+---
 
+## 🏗️ High-Level Design Overview
 
-Design Pattern used:
-1. Singleton
-2. Strategy : (public interface ParkingStategy )
-```
+The Parking Lot system is designed using **clean OOP principles** and focuses on:
+
+- Clear separation of responsibilities
+- Pluggable strategies for parking and pricing
+- Extensibility for future requirements
+
+The design is divided into:
+
+- **Entities** → Core parking objects
+- **Services** → Entry/Exit orchestration
+- **Strategies** → Parking allocation & fee calculation
+- **Repositories** → In-memory state management
+
+---
+
+## 📦 Core Domain Entities (Simple Explanation)
+
+| Entity | Responsibility |
+|-----|--------------|
+| ParkingLotService | Central coordinator for parking operations |
+| ParkingFloor | Represents a floor in the parking lot |
+| ParkingSpot | Represents an individual parking spot |
+| Vehicle | Represents a vehicle entering the parking lot |
+| ParkingTicket | Stores parking entry details |
+| Fee | Represents calculated parking fee |
+
+---
+
+## 🧩 Design Patterns Used
+
+### ✅ Singleton Pattern
+- `ParkingLotService` is implemented as a Singleton.
+- Ensures a single logical Parking Lot system managing all floors and tickets.
+
+### ✅ Strategy Pattern
+Used in two places:
+
+#### Parking Strategy
+- Determines how a parking spot is selected.
+- Example: Nearest available spot.
+- Easily extensible for other strategies.
+
+#### Fee Strategy
+- Determines how parking fees are calculated.
+- Example: Flat rate pricing.
+- Can be extended for hourly or dynamic pricing.
+
+### ✅ Repository Pattern (Lightweight)
+- Parking state and tickets are stored in in-memory collections.
+- Storage logic is abstracted for easy replacement.
+
+---
+
+## 📐 UML Diagram (Conceptual)
+ParkingLotService
+│
+├── manages ──> ParkingFloor
+│ │
+│ └── contains ──> ParkingSpot
+│
+├── issues ──> ParkingTicket ──> Vehicle
+│
+└── uses ──> ParkingStrategy
+FeeStrategy
+
