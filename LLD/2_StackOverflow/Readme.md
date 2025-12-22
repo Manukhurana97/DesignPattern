@@ -72,6 +72,7 @@ This design focuses on **clean domain modeling** and follows a layered structure
 ---
 
 ## 📐 UML Diagram (Conceptual)
+```
 
 User
 │
@@ -86,3 +87,4 @@ User
 └── votes ──> Vote
 
 
+```

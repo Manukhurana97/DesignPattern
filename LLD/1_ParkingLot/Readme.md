@@ -88,6 +88,7 @@ Used in two places:
 ---
 
 ## 📐 UML Diagram (Conceptual)
+```
 ParkingLotService
 │
 ├── manages ──> ParkingFloor
@@ -99,3 +100,4 @@ ParkingLotService
 └── uses ──> ParkingStrategy
 FeeStrategy
 
+```
