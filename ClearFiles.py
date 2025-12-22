@@ -1,33 +1,35 @@
 import os
+import shutil
 
-path = os.path.join("./")
+ROOT_PATH = "./"
+FOLDERS_TO_DELETE = {".idea", ".vscode"}
 
-def deleteFile(dir, fileName):
-	os.remove(os.path.join(dir, fileName))
+def delete_class_files_recursively(directory):
+    count = 0
+    for root, dirs, files in os.walk(directory):
+        for file in files:
+            if file.endswith(".class"):
+                os.remove(os.path.join(root, file))
+                count += 1
+    return count
 
-def deleteClassFilesRecursively(directory):
-	count = 0
 
-	for root, dir, files in os.walk(directory):
-		for file in files:
-			if file.endswith('.class'):
-				deleteFile(root, file)
-				count += 1
-			
+# 1️⃣ Delete .idea and .vscode completely
+for folder in FOLDERS_TO_DELETE:
+    folder_path = os.path.join(ROOT_PATH, folder)
+    if os.path.isdir(folder_path):
+        shutil.rmtree(folder_path)
+        print(f"Deleted folder: {folder_path}")
 
-	return count;
-
+# 2️⃣ Delete .class files from remaining directories
 total = 0
-for directory in os.listdir(path):
-	dir = os.path.join(path, directory)
-	
-	if os.path.isdir(dir):
-		count = deleteClassFilesRecursively(dir)
-		total += count
-		
-		print(count, "files removed from",dir)
+for entry in os.listdir(ROOT_PATH):
+    entry_path = os.path.join(ROOT_PATH, entry)
+
+    if os.path.isdir(entry_path):
+        count = delete_class_files_recursively(entry_path)
+        total += count
+        print(count, "class files removed from", entry_path)
+
 print()
-print(total, " total class file deleted")
-
-
-
+print(total, "total class files deleted")
