@@ -1,35 +1,34 @@
 import os
 import shutil
 
-ROOT_PATH = "./"
-FOLDERS_TO_DELETE = {".idea", ".vscode"}
+ROOT_PATH = os.path.dirname(os.path.abspath(__file__))
+FOLDERS_TO_DELETE = {".ideaa", ".vscode"}
 
-def delete_class_files_recursively(directory):
-    count = 0
-    for root, dirs, files in os.walk(directory):
-        for file in files:
-            if file.endswith(".class"):
-                os.remove(os.path.join(root, file))
-                count += 1
-    return count
+total_class_files = 0
+total_folders_deleted = 0
 
+for root, dirs, files in os.walk(ROOT_PATH):
+    # 🔴 Skip .git itself but clean inside projects
+    if ".git" in dirs:
+        dirs.remove(".git")
 
-# 1️⃣ Delete .idea and .vscode completely
-for folder in FOLDERS_TO_DELETE:
-    folder_path = os.path.join(ROOT_PATH, folder)
-    if os.path.isdir(folder_path):
-        shutil.rmtree(folder_path)
-        print(f"Deleted folder: {folder_path}")
+    # 1️⃣ Delete .idea / .vscode folders
+    for d in list(dirs):  # list() because we mutate dirs
+        if d in FOLDERS_TO_DELETE:
+            folder_path = os.path.join(root, d)
+            shutil.rmtree(folder_path)
+            dirs.remove(d)  # prevent further walk
+            total_folders_deleted += 1
+            print(f"🗑️ Deleted folder: {folder_path}")
 
-# 2️⃣ Delete .class files from remaining directories
-total = 0
-for entry in os.listdir(ROOT_PATH):
-    entry_path = os.path.join(ROOT_PATH, entry)
+    # 2️⃣ Delete .class files
+    for file in files:
+        if file.endswith(".class"):
+            file_path = os.path.join(root, file)
+            os.remove(file_path)
+            total_class_files += 1
+            print(f"❌ Deleted class file: {file_path}")
 
-    if os.path.isdir(entry_path):
-        count = delete_class_files_recursively(entry_path)
-        total += count
-        print(count, "class files removed from", entry_path)
-
-print()
-print(total, "total class files deleted")
+print("\n✅ Cleanup completed")
+print(f"📦 Total folders deleted (.idea/.vscode): {total_folders_deleted}")
+print(f"📄 Total .class files deleted: {total_class_files}")

@@ -1,4 +1,4 @@
-package entity;
+package enums;
 
 public enum VehicleType {
 	BIKE(1, 10),
