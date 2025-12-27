@@ -1,0 +1,5 @@
+package enums;
+
+public enum TaskStatus {
+	NEW, START, IN_PROGRESS, IN_SPRING_REVIEW, IN_SPRINT_TESTING, DONE, CANCELED
+}
