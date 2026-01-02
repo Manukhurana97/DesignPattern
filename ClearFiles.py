@@ -30,5 +30,5 @@ for root, dirs, files in os.walk(ROOT_PATH):
             print(f"❌ Deleted class file: {file_path}")
 
 print("\n✅ Cleanup completed")
-print(f"📦 Total folders deleted (.idea/.vscode): {total_folders_deleted}")
+print(f"📦 Total folders deleted (.idea/.vscode/.out): {total_folders_deleted}")
 print(f"📄 Total .class files deleted: {total_class_files}")
