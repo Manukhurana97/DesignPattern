@@ -2,7 +2,7 @@ import os
 import shutil
 
 ROOT_PATH = os.path.dirname(os.path.abspath(__file__))
-FOLDERS_TO_DELETE = {".idea", ".vscode", ".out"}
+FOLDERS_TO_DELETE = {".ideaa", ".vscode", ".out"}
 
 total_class_files = 0
 total_folders_deleted = 0

@@ -1,0 +1,1 @@
+The <b>Proto Design pattern</b> is an <a href="../../../README.md#creational">creational design pattern</a> that create new object by cloning existing objects instead of creating them from scratch.
