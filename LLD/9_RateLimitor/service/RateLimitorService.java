@@ -1,5 +1,6 @@
 package service;
 
+import entities.*;
 import strategy.*;
 
 public class RateLimitorService {
@@ -24,7 +25,11 @@ public class RateLimitorService {
 	}
 
 
-	public boolean sendRequest(String userId) {
-		return strategy.requestAllowed(userId);
+	public Response sendRequest(String userId) {
+		if(strategy.requestAllowed(userId)) {
+			return new Response(true, 200, "Ok");
+		}
+			
+		return new Response(false, 429, "Too many requests");
 	}	
 }

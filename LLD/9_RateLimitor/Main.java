@@ -28,11 +28,13 @@ public class Main {
 
             }
 
-            if (service.sendRequest("abc")) {
-                System.out.printf("[%s] %d Requested: Allowed \n", name, i);
+            var response = service.sendRequest("abc");
+
+            if (response.success()) {
+                System.out.printf("[%s] %d Requested: Allowed, Status %s %s %n", name, i, response.httpcode(), response.message());
             } else {
 
-                System.out.printf("[%s] %d Requested: Not-Allowed \n", name, i);
+                System.out.printf("[%s] %d Requested: Not-Allowed %s %s %n", name, i, response.httpcode(), response.message());
             }
         }
     }
