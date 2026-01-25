@@ -1,4 +1,4 @@
-package service;
+spackage service;
 
 import entities.*;
 import strategy.*;

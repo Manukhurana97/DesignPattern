@@ -5,7 +5,7 @@ ROOT_PATH = os.path.dirname(os.path.abspath(__file__))
 FOLDERS_TO_DELETE = {".idea", ".vscode", "out"}
 FILES_TO_DELETE_WITH_EXTENTION = {".class", ".iml"}
 
-total_class_files = 0
+total_files_deleted = 0
 total_folders_deleted = 0
 
 for root, dirs, files in os.walk(ROOT_PATH):
@@ -27,9 +27,9 @@ for root, dirs, files in os.walk(ROOT_PATH):
         if os.path.splitext(file)[1] in FILES_TO_DELETE_WITH_EXTENTION:
             file_path = os.path.join(root, file)
             os.remove(file_path)
-            total_class_files += 1
+            total_files_deleted += 1
             print(f"❌ Deleted class file: {file_path}")
 
 print("\n✅ Cleanup completed")
 print(f"📦 Total folders deleted (.idea/.vscode/.out): {total_folders_deleted}")
-print(f"📄 Total .class files deleted: {total_class_files}")
+print(f"📄 Total {FILES_TO_DELETE_WITH_EXTENTION} files deleted: {total_files_deleted}")
